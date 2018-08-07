@@ -12,7 +12,7 @@ if rank == 0
   println("Sending message from rank 0 to rank 1")
   MPI.Send(msg, 1, tag, comm)
 elseif rank == 1
-  rec_buf = fill(UInt8('a'), 10)
+  rec_buf = fill(UInt8('_'), 10)
   MPI.Recv!(rec_buf, 0, tag, comm)
   println("Received message $(String(rec_buf)) from rank 0")
 end
