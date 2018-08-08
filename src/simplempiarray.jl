@@ -8,13 +8,12 @@ struct SimpleMPIVector{T} <: AbstractVector{T}
   localarray::Vector{T}
   comm::MPI.Comm
   win::MPI.Win
-  myrank::Int
 
   function SimpleMPIVector{T}(comm::MPI.Comm, len) where {T}
     locarr = Vector{T}(undef, len)
     win = MPI.Win()
     MPI.Win_create(locarr, MPI.INFO_NULL, comm, win)
-    return new{T}(locarr, comm, win, MPI.Comm_rank(comm))
+    return new{T}(locarr, comm, win)
   end
 end
 
